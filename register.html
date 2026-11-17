@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>রক্তদাতা নিবন্ধন | রক্ত বন্ধন রৌমারী</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px 14px;
+      font-family: Arial, sans-serif;
+      background: #fff5f5;
+      color: #333;
+    }
+
+    .container {
+      max-width: 540px;
+      margin: 15px auto;
+      background: #fff;
+      padding: 25px 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 18px rgba(0,0,0,.08);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .header h1 {
+      color: #b5121b;
+      margin: 0 0 8px;
+      font-size: 27px;
+    }
+
+    .header p {
+      color: #666;
+      margin: 0;
+      font-size: 14px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #b5121b;
+      font-size: 22px;
+      margin-bottom: 22px;
+    }
+
+    .section-heading {
+      color: #b5121b;
+      font-size: 17px;
+      margin-top: 25px;
+      padding-bottom: 9px;
+      border-bottom: 1px solid #f1d5d7;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin: 15px 0 7px;
+      font-size: 15px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 15px;
+      background: white;
+      color: #333;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #b5121b;
+    }
+
+    input[readonly] {
+      background: #f5f5f5;
+      color: #555;
+    }
+
+    .optional {
+      font-weight: normal;
+      color: #777;
+      font-size: 13px;
+    }
+
+    .consent {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin: 22px 0;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .consent input {
+      width: 18px;
+      height: 18px;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #b5121b;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #b5121b;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .note {
+      text-align: center;
+      font-size: 13px;
+      color: #777;
+      line-height: 1.7;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="header">
+      <h1>রক্ত বন্ধন রৌমারী</h1>
+      <p>রক্তের প্রয়োজনে, মানুষের পাশে।</p>
+    </div>
+
+    <h2>রক্তদাতা নিবন্ধন</h2>
+
+    <form id="donorForm">
+
+      <label for="name">আপনার পূর্ণ নাম *</label>
+      <input
+        type="text"
+        id="name"
+        required
+        placeholder="আপনার নাম লিখুন"
+      >
+
+      <label for="phone">মোবাইল নম্বর *</label>
+      <input
+        type="tel"
+        id="phone"
+        required
+        placeholder="আপনার মোবাইল নম্বর লিখুন"
+      >
+
+      <label for="blood">রক্তের গ্রুপ *</label>
+      <select id="blood" required>
+        <option value="">রক্তের গ্রুপ নির্বাচন করুন</option>
+        <option value="A+">A+</option>
+        <option value="A-">A-</option>
+        <option value="B+">B+</option>
+        <option value="B-">B-</option>
+        <option value="AB+">AB+</option>
+        <option value="AB-">AB-</option>
+        <option value="O+">O+</option>
+        <option value="O-">O-</option>
+      </select>
+
+      <h3 class="section-heading">আপনার ঠিকানা</h3>
+
+      <label for="district">জেলা</label>
+      <input
+        type="text"
+        id="district"
+        value="কুড়িগ্রাম"
+        readonly
+      >
+
+      <label for="upazila">উপজেলা</label>
+      <input
+        type="text"
+        id="upazila"
+        value="রৌমারী"
+        readonly
+      >
+
+      <label for="union">ইউনিয়ন *</label>
+      <select id="union" required>
+        <option value="">ইউনিয়ন নির্বাচন করুন</option>
+        <option value="দাঁতভাঙ্গা">দাঁতভাঙ্গা</option>
+        <option value="শৌলমারী">শৌলমারী</option>
+        <option value="বন্দবেড়">বন্দবেড়</option>
+        <option value="রৌমারী">রৌমারী</option>
+        <option value="যাদুরচর">যাদুরচর</option>
+        <option value="চর শৌলমারী">চর শৌলমারী</option>
+      </select>
+
+      <label for="ward">ওয়ার্ড নম্বর *</label>
+      <select id="ward" required>
+        <option value="">ওয়ার্ড নির্বাচন করুন</option>
+        <option value="১">১</option>
+        <option value="২">২</option>
+        <option value="৩">৩</option>
+        <option value="৪">৪</option>
+        <option value="৫">৫</option>
+        <option value="৬">৬</option>
+        <option value="৭">৭</option>
+        <option value="৮">৮</option>
+        <option value="৯">৯</option>
+      </select>
+
+      <label for="village">
+        গ্রামের নাম <span class="optional">(ঐচ্ছিক)</span>
+      </label>
+      <input
+        type="text"
+        id="village"
+        placeholder="নিজের গ্রামের নাম লিখুন"
+      >
+
+      <h3 class="section-heading">অন্যান্য তথ্য</h3>
+
+      <label for="facebook">
+        ফেসবুক প্রোফাইল লিংক
+        <span class="optional">(ঐচ্ছিক)</span>
+      </label>
+      <input
+        type="url"
+        id="facebook"
+        placeholder="https://facebook.com/..."
+      >
+
+      <label for="lastDonate">
+        সর্বশেষ রক্তদানের তারিখ
+        <span class="optional">(ঐচ্ছিক)</span>
+      </label>
+      <input type="date" id="lastDonate">
+
+      <div class="consent">
+        <input type="checkbox" id="phoneConsent" required>
+        <label for="phoneConsent" style="margin:0;font-weight:normal;">
+          আমি সম্মতি দিচ্ছি যে, রক্তের প্রয়োজনে মানুষ আমার দেওয়া
+          মোবাইল নম্বরে যোগাযোগ করতে পারবেন।
+          <strong>*</strong>
+        </label>
+      </div>
+
+      <button type="submit">নিবন্ধন করুন</button>
+
+    </form>
+
+    <p class="note">
+      রক্ত বন্ধন রৌমারী একটি অলাভজনক স্বেচ্ছাসেবী উদ্যোগ।
+      <br>
+      মানুষের প্রয়োজনে রক্তদাতাদের পাশে থাকার একটি প্রচেষ্টা।
+    </p>
+
+    <a class="back" href="index.html">
+      ← হোম পেজে ফিরে যান
+    </a>
+
+  </div>
+
+  <script>
+    document.getElementById("donorForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      alert(
+        "নিবন্ধন ব্যবস্থা এখনো চালু হয়নি। " +
+        "তথ্য সংরক্ষণের ব্যবস্থা প্রস্তুত হলে নিবন্ধন চালু হবে।"
+      );
+    });
+  </script>
+
+</body>
+</html>
