@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b91425"/>
+      <stop offset="1" stop-color="#650713"/>
+    </linearGradient>
+
+    <radialGradient id="blood" cx="32%" cy="25%" r="75%">
+      <stop offset="0" stop-color="#ff8585"/>
+      <stop offset=".32" stop-color="#f21d38"/>
+      <stop offset=".7" stop-color="#bd001b"/>
+      <stop offset="1" stop-color="#65000d"/>
+    </radialGradient>
+
+    <linearGradient id="shine" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <filter id="shadow" x="-40%" y="-30%" width="180%" height="190%">
+      <feGaussianBlur stdDeviation="15"/>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+
+  <rect x="13" y="13" width="486" height="486" rx="100"
+        fill="none" stroke="#ffffff" stroke-opacity=".13" stroke-width="2"/>
+
+  <ellipse cx="256" cy="407" rx="112" ry="20"
+           fill="#250008" opacity=".45" filter="url(#shadow)"/>
+
+  <path d="M256 68
+           C219 137 147 224 147 314
+           A109 109 0 0 0 365 314
+           C365 224 293 137 256 68Z"
+        fill="url(#blood)"
+        stroke="#ff9a9a"
+        stroke-opacity=".45"
+        stroke-width="3"/>
+
+  <path d="M214 207
+           C229 173 247 141 256 124"
+        fill="none"
+        stroke="url(#shine)"
+        stroke-width="19"
+        stroke-linecap="round"/>
+
+  <ellipse cx="203" cy="278" rx="13" ry="38"
+           fill="#ffffff" opacity=".20"
+           transform="rotate(24 203 278)"/>
+
+  <path d="M193 339
+           C202 378 237 397 269 394"
+        fill="none"
+        stroke="#ff8b8b"
+        stroke-opacity=".35"
+        stroke-width="7"
+        stroke-linecap="round"/>
+</svg>
