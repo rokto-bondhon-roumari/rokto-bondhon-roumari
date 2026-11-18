@@ -534,6 +534,17 @@
     <strong>রক্ত বন্ধন রৌমারী</strong>
     <p>© 2026 Rokto Bondhon Roumari. All Rights Reserved.</p>
   </footer>
-
+<script>  
+  if ("serviceWorker" in navigator) {  
+    window.addEventListener("load", () => {  
+      navigator.serviceWorker.register(  
+        "/rokto-bondhon-roumari/service-worker.js",  
+        { scope: "/rokto-bondhon-roumari/" }  
+      ).catch((error) => {  
+        console.error("Service Worker Error:", error);  
+      });  
+    });  
+  }  
+      </script>
 </body>
 </html>
