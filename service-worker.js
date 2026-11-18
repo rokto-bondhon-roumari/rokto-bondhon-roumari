@@ -1,4 +1,4 @@
-const CACHE_NAME = "rokto-bondhon-v1";
+const CACHE_NAME = "rokto-bondhon-v2";
 
 const BASE_PATH = "/rokto-bondhon-roumari/";
 
@@ -8,6 +8,7 @@ const FILES_TO_CACHE = [
   BASE_PATH + "register.html",
   BASE_PATH + "search.html",
   BASE_PATH + "sujon.jpg",
+  BASE_PATH + "icon.svg",
   BASE_PATH + "manifest.webmanifest"
 ];
 
