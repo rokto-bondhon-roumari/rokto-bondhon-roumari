@@ -1,0 +1,13 @@
+{
+  "id": "/rokto-bondhon-roumari/",
+  "name": "রক্ত বন্ধন রৌমারী",
+  "short_name": "রক্ত বন্ধন",
+  "description": "রক্তের প্রয়োজনে, মানুষের পাশে।",
+  "lang": "bn",
+  "start_url": "/rokto-bondhon-roumari/",
+  "scope": "/rokto-bondhon-roumari/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#a90f1b"
+}
