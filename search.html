@@ -1,0 +1,430 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#a90f1b">
+  <meta name="description" content="রক্ত বন্ধন রৌমারী রক্তদাতা খুঁজুন।">
+  <title>রক্ত খুঁজুন | রক্ত বন্ধন রৌমারী</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --red:#a90f1b;
+      --dark-red:#790b14;
+      --light:#fff5f5;
+      --white:#fff;
+      --text:#282326;
+      --muted:#70676a;
+      --border:#f0dfe1;
+      --shadow:0 12px 35px rgba(95,12,23,.09);
+    }
+
+    * {margin:0;padding:0;box-sizing:border-box;}
+
+    body {
+      font-family:'Hind Siliguri',sans-serif;
+      color:var(--text);
+      line-height:1.7;
+      background:#fff;
+    }
+
+    a {text-decoration:none;color:inherit;}
+
+    .container {width:min(1120px,90%);margin:auto;}
+
+    header {
+      background:var(--red);
+      color:#fff;
+      padding:17px 0;
+    }
+
+    .header-content {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+    }
+
+    .brand {font-size:25px;font-weight:700;line-height:1.3;}
+    .brand small {display:block;font-size:12px;font-weight:400;}
+
+    .nav-link {
+      font-size:14px;
+      border:1px solid rgba(255,255,255,.5);
+      padding:7px 15px;
+      border-radius:7px;
+    }
+
+    main {min-height:65vh;}
+
+    .search-section {padding:66px 0;}
+
+    .section-title {
+      text-align:center;
+      font-size:31px;
+      color:var(--red);
+      margin-bottom:8px;
+    }
+
+    .section-subtitle {
+      text-align:center;
+      font-size:16px;
+      color:var(--muted);
+      margin-bottom:35px;
+    }
+
+    .search-box {
+      max-width:760px;
+      margin:auto;
+      padding:30px;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:15px;
+      box-shadow:var(--shadow);
+    }
+
+    .group-heading {
+      text-align:center;
+      font-size:17px;
+      margin-bottom:18px;
+    }
+
+    .blood-groups {
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:13px;
+    }
+
+    .group-btn {
+      background:var(--light);
+      color:var(--red);
+      border:1px solid var(--border);
+      border-radius:9px;
+      padding:12px 8px;
+      font-family:inherit;
+      font-size:16px;
+      font-weight:600;
+      cursor:pointer;
+    }
+
+    .group-btn:hover,
+    .group-btn.active {
+      background:var(--red);
+      color:#fff;
+      border-color:var(--red);
+    }
+
+    .results {
+      max-width:900px;
+      margin:30px auto 0;
+    }
+
+    .results h2 {
+      text-align:center;
+      font-size:23px;
+      color:var(--red);
+      margin-bottom:18px;
+    }
+
+    #status {
+      text-align:center;
+      color:var(--muted);
+      padding:15px;
+    }
+
+    .donor-list {
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:16px;
+    }
+
+    .donor-card {
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:20px;
+      background:#fff;
+      box-shadow:var(--shadow);
+    }
+
+    .donor-top {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:12px;
+    }
+
+    .donor-name {
+      font-size:20px;
+      font-weight:700;
+    }
+
+    .blood-badge {
+      background:var(--red);
+      color:#fff;
+      padding:4px 12px;
+      border-radius:7px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .donor-info {
+      font-size:15px;
+      color:var(--muted);
+      overflow-wrap:anywhere;
+    }
+
+    .call-btn {
+      display:inline-block;
+      margin-top:13px;
+      background:var(--red);
+      color:#fff;
+      padding:7px 17px;
+      border-radius:7px;
+      font-weight:600;
+    }
+
+    .call-btn:hover {background:var(--dark-red);}
+
+    .facebook-link {
+      display:inline-block;
+      margin-top:8px;
+      color:var(--red);
+      font-weight:600;
+    }
+
+    .back-home {
+      display:inline-block;
+      margin-top:25px;
+      background:var(--red);
+      color:#fff;
+      padding:10px 22px;
+      border-radius:8px;
+      font-size:16px;
+      font-weight:600;
+    }
+
+    footer {
+      background:#2b171a;
+      color:#fff;
+      padding:30px 0;
+      text-align:center;
+    }
+
+    footer strong {display:block;font-size:21px;margin-bottom:5px;}
+    footer p {font-size:14px;color:#e5dadd;}
+
+    @media(max-width:600px) {
+      body {font-size:18px;}
+      .brand {font-size:23px;}
+      .brand small {font-size:14px;}
+      .nav-link {font-size:15px;padding:6px 10px;}
+      .search-section {padding:50px 0;}
+      .section-title {font-size:30px;}
+      .section-subtitle {font-size:18px;}
+      .search-box {padding:22px 15px;}
+      .group-heading {font-size:18px;}
+      .blood-groups {grid-template-columns:repeat(2,1fr);gap:11px;}
+      .group-btn {font-size:18px;padding:11px 5px;}
+      .donor-list {grid-template-columns:1fr;}
+      .donor-info {font-size:17px;}
+      footer strong {font-size:23px;}
+      footer p {font-size:16px;}
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container header-content">
+      <a href="index.html" class="brand">
+        রক্ত বন্ধন রৌমারী
+        <small>স্বেচ্ছাসেবী রক্তদাতা উদ্যোগ</small>
+      </a>
+      <a href="index.html" class="nav-link">হোম পেজ</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="search-section">
+      <div class="container">
+        <h1 class="section-title">রক্তদাতা খুঁজুন</h1>
+        <p class="section-subtitle">
+          আপনার প্রয়োজনীয় রক্তের গ্রুপ নির্বাচন করুন
+        </p>
+
+        <div class="search-box">
+          <h2 class="group-heading">রক্তের গ্রুপ নির্বাচন করুন</h2>
+
+          <div class="blood-groups">
+            <button class="group-btn active" data-group="all">সব গ্রুপ</button>
+            <button class="group-btn" data-group="A+">A+</button>
+            <button class="group-btn" data-group="A-">A-</button>
+            <button class="group-btn" data-group="B+">B+</button>
+            <button class="group-btn" data-group="B-">B-</button>
+            <button class="group-btn" data-group="O+">O+</button>
+            <button class="group-btn" data-group="O-">O-</button>
+            <button class="group-btn" data-group="AB+">AB+</button>
+            <button class="group-btn" data-group="AB-">AB-</button>
+          </div>
+        </div>
+
+        <div class="results">
+          <h2 id="result-title">সব রক্তদাতা</h2>
+          <p id="status">রক্তদাতার তথ্য লোড হচ্ছে...</p>
+          <div class="donor-list" id="donor-list"></div>
+        </div>
+
+        <div style="text-align:center;">
+          <a href="index.html" class="back-home">হোম পেজে ফিরে যান</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <strong>রক্ত বন্ধন রৌমারী</strong>
+      <p>রক্তের প্রয়োজনে, মানুষের পাশে।</p>
+      <p>© 2026 Rokto Bondhon Roumari. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { initializeApp } from
+      "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+
+    import { getFirestore, collection, onSnapshot }
+      from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+    // এখানে register.html-এর একই Firebase Config বসাতে হবে।
+    const firebaseConfig = {
+      apiKey: "এখানে register.html-এর apiKey বসাও",
+      authDomain: "rokto-bondhon-roumari.firebaseapp.com",
+      projectId: "rokto-bondhon-roumari",
+      storageBucket: "rokto-bondhon-roumari.firebasestorage.app",
+      messagingSenderId: "635710402171",
+      appId: "1:635710402171:web:e5c25d42d0eed8af50bcde",
+      measurementId: "G-70BP42NXBF"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const donorList = document.getElementById("donor-list");
+    const status = document.getElementById("status");
+    const resultTitle = document.getElementById("result-title");
+    const buttons = document.querySelectorAll(".group-btn");
+
+    let allDonors = [];
+    let selectedGroup = "all";
+
+    function addText(parent, tag, className, value) {
+      const element = document.createElement(tag);
+      element.className = className;
+      element.textContent = value;
+      parent.appendChild(element);
+      return element;
+    }
+
+    function showDonors() {
+      donorList.replaceChildren();
+
+      const filtered = selectedGroup === "all"
+        ? allDonors
+        : allDonors.filter(d => d.bloodGroup === selectedGroup);
+
+      resultTitle.textContent = selectedGroup === "all"
+        ? "সব রক্তদাতা"
+        : selectedGroup + " রক্তদাতা";
+
+      if (filtered.length === 0) {
+        status.textContent = "এই মুহূর্তে কোনো রক্তদাতার তথ্য পাওয়া যায়নি।";
+        return;
+      }
+
+      status.textContent = "মোট রক্তদাতা: " + filtered.length + " জন";
+
+      filtered.forEach(donor => {
+        const card = document.createElement("div");
+        card.className = "donor-card";
+
+        const top = document.createElement("div");
+        top.className = "donor-top";
+
+        addText(top, "div", "donor-name", donor.name || "নাম দেওয়া হয়নি");
+        addText(top, "span", "blood-badge", donor.bloodGroup || "N/A");
+        card.appendChild(top);
+
+        const address = [
+          donor.village,
+          donor.union,
+          donor.upazila,
+          donor.district
+        ].filter(Boolean).join(", ");
+
+        addText(card, "p", "donor-info", "ঠিকানা: " + (address || "তথ্য নেই"));
+        addText(card, "p", "donor-info", "ওয়ার্ড: " + (donor.ward || "তথ্য নেই"));
+
+        if (donor.lastDonation) {
+          addText(card, "p", "donor-info",
+            "শেষ রক্তদান: " + donor.lastDonation);
+        }
+
+        if (donor.phone) {
+          const call = document.createElement("a");
+          call.className = "call-btn";
+          call.href = "tel:" + donor.phone;
+          call.textContent = "ফোন করুন";
+          card.appendChild(call);
+        }
+
+        if (donor.facebook) {
+          try {
+            const url = new URL(donor.facebook);
+            if (url.protocol === "https:" || url.protocol === "http:") {
+              const fb = document.createElement("a");
+              fb.className = "facebook-link";
+              fb.href = url.href;
+              fb.target = "_blank";
+              fb.rel = "noopener noreferrer";
+              fb.textContent = "Facebook প্রোফাইল";
+              card.appendChild(fb);
+            }
+          } catch (e) {}
+        }
+
+        donorList.appendChild(card);
+      });
+    }
+
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        buttons.forEach(item => item.classList.remove("active"));
+        button.classList.add("active");
+
+        selectedGroup = button.dataset.group;
+        showDonors();
+      });
+    });
+
+    // Firestore-এ নতুন নিবন্ধন হলে তালিকা নিজে থেকেই আপডেট হবে।
+    onSnapshot(collection(db, "donors"), snapshot => {
+      allDonors = snapshot.docs
+        .map(doc => doc.data())
+        .filter(donor => donor.consent === true);
+
+      showDonors();
+    }, error => {
+      console.error(error);
+      status.textContent =
+        "তথ্য লোড করা যায়নি। Firebase Config ও Firestore Rules পরীক্ষা করতে হবে।";
+    });
+  </script>
+</body>
+</html>
