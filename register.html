@@ -254,7 +254,7 @@ footer {
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
 
-import { getAuth, signInAnonymously }
+import { getAuth, signInAnonymously, signOut }
 from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
 import { getFirestore, doc, setDoc, serverTimestamp }
@@ -378,7 +378,7 @@ form.addEventListener("submit", async function(event) {
   message.textContent = "";
 
   try {
-
+await signOut(auth);
     const credential = await signInAnonymously(auth);
     const user = credential.user;
 
