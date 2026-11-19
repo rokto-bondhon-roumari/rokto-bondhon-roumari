@@ -89,6 +89,7 @@ input[readonly] {
   width: 18px;
   height: 18px;
   margin-top: 2px;
+  flex-shrink: 0;
 }
 
 button {
@@ -112,6 +113,7 @@ button:disabled {
   text-align: center;
   font-size: 14px;
   margin-top: 15px;
+  line-height: 1.6;
 }
 
 .home {
@@ -150,7 +152,7 @@ footer {
     placeholder="আপনার সম্পূর্ণ নাম">
 
     <label>মোবাইল নম্বর *</label>
-    <input id="phone" type="tel" required maxlength="20"
+    <input id="phone" type="tel" required minlength="8" maxlength="20"
     placeholder="01XXXXXXXXX">
 
     <label>রক্তের গ্রুপ *</label>
@@ -166,21 +168,32 @@ footer {
       <option value="O-">O-</option>
     </select>
 
+    <label>দেশ</label>
+    <input type="text" value="বাংলাদেশ" readonly>
+
+    <label>বিভাগ</label>
+    <input type="text" value="রংপুর" readonly>
+
     <label>জেলা</label>
     <input type="text" value="কুড়িগ্রাম" readonly>
 
-    <label>উপজেলা</label>
-    <input type="text" value="রৌমারী" readonly>
+    <label>উপজেলা *</label>
+    <select id="upazila" required>
+      <option value="">উপজেলা নির্বাচন করুন</option>
+      <option value="কুড়িগ্রাম সদর">কুড়িগ্রাম সদর</option>
+      <option value="ভূরুঙ্গামারী">ভূরুঙ্গামারী</option>
+      <option value="নাগেশ্বরী">নাগেশ্বরী</option>
+      <option value="ফুলবাড়ী">ফুলবাড়ী</option>
+      <option value="রাজারহাট">রাজারহাট</option>
+      <option value="উলিপুর">উলিপুর</option>
+      <option value="চিলমারী">চিলমারী</option>
+      <option value="রৌমারী">রৌমারী</option>
+      <option value="চর রাজিবপুর">চর রাজিবপুর</option>
+    </select>
 
     <label>ইউনিয়ন *</label>
-    <select id="union" required>
-      <option value="">ইউনিয়ন নির্বাচন করুন</option>
-      <option value="দাঁতভাঙ্গা">দাঁতভাঙ্গা</option>
-      <option value="শৌলমারী">শৌলমারী</option>
-      <option value="বন্দবেড়">বন্দবেড়</option>
-      <option value="রৌমারী">রৌমারী</option>
-      <option value="যাদুরচর">যাদুরচর</option>
-      <option value="চর শৌলমারী">চর শৌলমারী</option>
+    <select id="union" required disabled>
+      <option value="">প্রথমে উপজেলা নির্বাচন করুন</option>
     </select>
 
     <label>ওয়ার্ড নম্বর *</label>
@@ -195,17 +208,18 @@ footer {
       <option value="৭">৭</option>
       <option value="৮">৮</option>
       <option value="৯">৯</option>
+      <option value="জানা নেই">জানা নেই</option>
     </select>
 
-    <label>গ্রামের নাম</label>
-    <input id="village" type="text" maxlength="100"
-    placeholder="গ্রামের নাম (ঐচ্ছিক)">
+    <label>গ্রামের নাম *</label>
+    <input id="village" type="text" required maxlength="100"
+    placeholder="আপনার গ্রামের নাম লিখুন">
 
-    <label>ফেসবুক প্রোফাইল লিংক</label>
-    <input id="facebook" type="url" maxlength="300"
-    placeholder="ঐচ্ছিক">
+    <label>ফেসবুক প্রোফাইল লিংক (ঐচ্ছিক)</label>
+    <input id="facebook" type="url" maxlength="500"
+    placeholder="https://facebook.com/...">
 
-    <label>সর্বশেষ রক্তদানের তারিখ</label>
+    <label>সর্বশেষ রক্তদানের তারিখ (ঐচ্ছিক)</label>
     <input id="lastDonation" type="date">
 
     <div class="consent">
@@ -263,9 +277,95 @@ const db = getFirestore(app);
 const form = document.getElementById("donorForm");
 const message = document.getElementById("message");
 const button = document.getElementById("submitBtn");
+const upazilaSelect = document.getElementById("upazila");
+const unionSelect = document.getElementById("union");
 
+// Rules-এর সঙ্গে হুবহু মিল রেখে উপজেলার ইউনিয়ন তালিকা
+const unions = {
+  "কুড়িগ্রাম সদর": [
+    "কাঁঠালবাড়ী", "হলোখানা", "ভোগডাঙ্গা", "ঘোগাদহ",
+    "বেলগাছা", "মোগলবাসা", "পাঁচগাছি", "যাত্রাপুর"
+  ],
+
+  "ভূরুঙ্গামারী": [
+    "পাথরডুবি", "শিলখুড়ি", "তিলাই", "পাইকেরছড়া",
+    "ভুরুঙ্গামারী", "জয়মনিরহাট", "আন্ধারীঝাড়",
+    "বলদিয়া", "চর-ভূরুঙ্গামারী", "বঙ্গসোনাহাট"
+  ],
+
+  "নাগেশ্বরী": [
+    "রামখানা", "রায়গঞ্জ", "বামনডাঙ্গা", "বেরুবাড়ী",
+    "সন্তোষপুর", "নেওয়াশী", "হাসনাবাদ", "ভিতরবন্দ",
+    "কালীগঞ্জ", "নুনখাওয়া", "নারায়ণপুর",
+    "বল্লভেরখাস", "কেদার", "কচাকাটা"
+  ],
+
+  "ফুলবাড়ী": [
+    "শিমুলবাড়ী", "নাওডাঙ্গা", "ভাঙ্গামোড়",
+    "ফুলবাড়ী", "কাশিপুর", "বড়ভিটা"
+  ],
+
+  "রাজারহাট": [
+    "ঘড়িয়ালডাঙ্গা", "ছিনাই", "রাজারহাট",
+    "চাকিরপশার", "বিদ্যানন্দ", "উমরমজিদ", "নজিমখাঁন"
+  ],
+
+  "উলিপুর": [
+    "গুনাইগাছ", "দলদলিয়া", "দুর্গাপুর", "তবকপুর",
+    "বুড়াবুড়ী", "পান্ডুল", "ধামশ্রেণী", "ধরণীবাড়ী",
+    "থেতরাই", "হাতিয়া", "বজরা", "বেগমগঞ্জ",
+    "সাহেবের আলগা"
+  ],
+
+  "চিলমারী": [
+    "থানাহাট", "রাণীগঞ্জ", "রমনা",
+    "চিলমারী", "অষ্টমীর চর", "নয়ারহাট"
+  ],
+
+  "রৌমারী": [
+    "বন্দবেড়", "শৌলমারী", "রৌমারী",
+    "দাঁতভাঙ্গা", "যাদুরচর", "চর শৌলমারী"
+  ],
+
+  "চর রাজিবপুর": [
+    "রাজিবপুর", "কোদালকাটি", "মোহনগঞ্জ"
+  ]
+};
+
+// উপজেলা অনুযায়ী ইউনিয়ন দেখানো
+upazilaSelect.addEventListener("change", function() {
+
+  const selectedUpazila = upazilaSelect.value;
+
+  unionSelect.innerHTML = "";
+
+  const firstOption = document.createElement("option");
+  firstOption.value = "";
+  firstOption.textContent = "ইউনিয়ন নির্বাচন করুন";
+  unionSelect.appendChild(firstOption);
+
+  if (!selectedUpazila || !unions[selectedUpazila]) {
+    unionSelect.disabled = true;
+    return;
+  }
+
+  unions[selectedUpazila].forEach(function(unionName) {
+    const option = document.createElement("option");
+    option.value = unionName;
+    option.textContent = unionName;
+    unionSelect.appendChild(option);
+  });
+
+  unionSelect.disabled = false;
+});
+
+// নিবন্ধন
 form.addEventListener("submit", async function(event) {
   event.preventDefault();
+
+  if (!form.reportValidity()) {
+    return;
+  }
 
   if (!document.getElementById("consent").checked) {
     message.textContent = "ফোন নম্বর প্রকাশের সম্মতি প্রয়োজন।";
@@ -278,6 +378,7 @@ form.addEventListener("submit", async function(event) {
   message.textContent = "";
 
   try {
+
     const credential = await signInAnonymously(auth);
     const user = credential.user;
 
@@ -286,8 +387,8 @@ form.addEventListener("submit", async function(event) {
       phone: document.getElementById("phone").value.trim(),
       bloodGroup: document.getElementById("bloodGroup").value,
       district: "কুড়িগ্রাম",
-      upazila: "রৌমারী",
-      union: document.getElementById("union").value,
+      upazila: upazilaSelect.value,
+      union: unionSelect.value,
       ward: document.getElementById("ward").value,
       village: document.getElementById("village").value.trim(),
       facebook: document.getElementById("facebook").value.trim(),
@@ -302,15 +403,25 @@ form.addEventListener("submit", async function(event) {
     message.style.color = "green";
     form.reset();
 
+    unionSelect.innerHTML =
+      '<option value="">প্রথমে উপজেলা নির্বাচন করুন</option>';
+    unionSelect.disabled = true;
+
   } catch (error) {
+
     console.error(error);
+
     message.textContent =
       "নিবন্ধন হয়নি। আবার চেষ্টা করুন। Error: " + error.code;
-    message.style.color = "red";
-  }
 
-  button.disabled = false;
-  button.textContent = "নিবন্ধন করুন";
+    message.style.color = "red";
+
+  } finally {
+
+    button.disabled = false;
+    button.textContent = "নিবন্ধন করুন";
+
+  }
 });
 
 </script>
