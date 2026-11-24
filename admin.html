@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#9b1728">
+<title>রক্ত বন্ধন | Owner Admin Panel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--red:#9b1728;--dark:#68101d;--bg:#f5f6f8;--card:#fff;--ink:#24232a;--muted:#737782;--line:#e7e8ec;--green:#16845b;--shadow:0 5px 22px #2025330b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:'Hind Siliguri',sans-serif;font-size:15px}button,input,select{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+.login-wrap{min-height:100vh;display:grid;place-items:center;padding:20px}.login-card{width:min(430px,100%);background:#fff;border:1px solid var(--line);padding:30px;border-radius:16px;box-shadow:var(--shadow);text-align:center}.logo{width:52px;height:52px;border-radius:13px;background:var(--red);color:white;display:grid;place-items:center;font-size:26px;margin:0 auto 12px}.login-card h1{margin:0;color:var(--dark);font-size:26px}.muted{color:var(--muted)}.btn{border:0;border-radius:8px;padding:9px 15px;background:var(--red);color:white;font-weight:600}.btn:hover{background:var(--dark)}.btn.secondary{background:#fff;color:var(--ink);border:1px solid var(--line)}.btn.danger{background:#b42332}.btn.small{padding:5px 10px;font-size:13px}.btn:disabled{opacity:.45;cursor:not-allowed}
+.app{min-height:100vh}.topbar{height:66px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:5}.brand{font-weight:700;color:var(--dark);font-size:20px}.brand small{display:block;font-size:11px;color:var(--muted);font-weight:400;line-height:1}.userline{display:flex;align-items:center;gap:12px}.layout{display:grid;grid-template-columns:235px 1fr;min-height:calc(100vh - 66px)}aside{background:#fff;border-right:1px solid var(--line);padding:20px 13px}.navlabel{font-size:11px;color:#999;padding:8px 12px}.navbtn{width:100%;border:0;background:transparent;text-align:left;padding:10px 12px;border-radius:8px;color:#4b4d55;margin:2px 0}.navbtn.active,.navbtn:hover{background:#fff0f2;color:var(--red);font-weight:700}.main{padding:25px;min-width:0;max-width:1600px;width:100%;margin:auto}.pagehead{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:20px}.pagehead h1{font-size:25px;margin:0;color:#28252b}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.stat{background:#fff;border:1px solid var(--line);border-radius:11px;padding:17px;box-shadow:var(--shadow)}.stat small{color:var(--muted)}.stat strong{display:block;font-size:28px;color:var(--red);line-height:1.35}.panel{background:#fff;border:1px solid var(--line);border-radius:11px;padding:18px;margin-top:17px;box-shadow:var(--shadow)}.panel h2{font-size:18px;margin:0 0 13px}.toolbar{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:14px}.field{padding:9px 11px;border:1px solid #dfe1e6;border-radius:8px;background:#fff;min-width:140px;max-width:100%}.field.search{flex:1;min-width:190px}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:8px}table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;font-size:13px}th{background:#fafafa;color:#626672;font-weight:600}tr:last-child td{border-bottom:0}.pill{display:inline-block;padding:2px 8px;background:#fff0f2;color:var(--red);border-radius:20px;font-weight:700}.empty{padding:30px;text-align:center;color:var(--muted)}.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.notice{padding:12px 14px;background:#fff8e8;border:1px solid #f2dfb5;border-radius:8px;color:#76551b;margin:12px 0}.success{background:#eaf8f1;border-color:#c5ead7;color:#176342}.modalback{position:fixed;inset:0;background:#11182780;z-index:20;display:grid;place-items:center;padding:16px}.modal{background:#fff;width:min(650px,100%);max-height:90vh;overflow:auto;border-radius:13px;padding:20px}.modal h2{margin:0 0 15px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.formitem label{display:block;font-size:13px;color:var(--muted);margin-bottom:4px}.formitem input,.formitem select{width:100%;padding:9px;border:1px solid var(--line);border-radius:7px}.modalactions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.mobilemenu{display:none}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}aside{display:none;position:fixed;top:66px;bottom:0;left:0;width:245px;z-index:10;box-shadow:10px 0 30px #0002}.aside-open aside{display:block}.mobilemenu{display:inline-block}.main{padding:17px}.topbar{padding:0 14px}}
+@media(max-width:560px){.grid{gap:9px}.stat{padding:12px}.stat strong{font-size:23px}.pagehead{align-items:flex-start;flex-direction:column}.two,.formgrid{grid-template-columns:1fr}.userline .email{display:none}.main{padding:13px}.panel{padding:13px}.brand{font-size:17px}}
+@media print{body{background:#fff}.topbar,aside,.no-print,.pagehead .btn{display:none!important}.layout{display:block}.main{padding:0}.panel,.stat{box-shadow:none;border:0}.tablewrap{overflow:visible}table{white-space:normal}th,td{font-size:10px;padding:5px}.print-title{display:block!important}}
+.print-title{display:none;text-align:center;margin-bottom:12px}
+</style>
+</head>
+<body>
+<div id="login" class="login-wrap">
+ <div class="login-card">
+  <div class="logo">র</div><h1>রক্ত বন্ধন</h1><p class="muted">রৌমারী · Owner Admin Panel</p>
+  <p class="muted">অনুমোদিত Google অ্যাকাউন্ট দিয়ে প্রবেশ করুন।</p>
+  <button class="btn" id="loginBtn">Google দিয়ে প্রবেশ করুন</button>
+  <p id="loginMsg" class="muted" style="font-size:13px;margin-top:14px"></p>
+ </div>
+</div>
+<div id="app" class="app hidden">
+ <header class="topbar">
+  <div style="display:flex;align-items:center;gap:12px"><button class="btn secondary mobilemenu no-print" id="menuBtn">☰</button><div class="brand">রক্ত বন্ধন <small>OWNER ADMIN PANEL</small></div></div>
+  <div class="userline"><span class="email muted" id="userEmail"></span><span class="pill" id="rolePill">ADMIN</span><button class="btn secondary small" id="logoutBtn">লগআউট</button></div>
+ </header>
+ <div class="layout" id="layout">
+  <aside>
+   <div class="navlabel">মূল মেনু</div>
+   <button class="navbtn active" data-page="dashboard">▦　ড্যাশবোর্ড</button>
+   <button class="navbtn" data-page="donors">♙　রক্তদাতা ব্যবস্থাপনা</button>
+   <button class="navbtn" data-page="duplicates">◎　ডুপ্লিকেট নম্বর</button>
+   <button class="navbtn" data-page="reports">▤　রিপোর্ট ও PDF</button>
+   <button class="navbtn" data-page="backup">⇩　Backup ও Restore</button>
+   <button class="navbtn owner-only" data-page="admins">♧　Admin ব্যবস্থাপনা</button>
+   <button class="navbtn" data-page="activity">◷　কার্যক্রমের ইতিহাস</button>
+   <div class="navlabel">অ্যাকাউন্ট</div>
+   <button class="navbtn" data-page="security">♢　নিরাপত্তা ও অনুমতি</button>
+  </aside>
+  <main class="main">
+   <section id="page-dashboard">
+    <div class="pagehead"><h1>ড্যাশবোর্ড</h1><button class="btn secondary no-print" id="refreshBtn">↻ রিফ্রেশ</button></div>
+    <div class="grid">
+     <div class="stat"><small>মোট রক্তদাতা</small><strong id="totalCount">—</strong></div>
+     <div class="stat"><small>আজকের নিবন্ধন</small><strong id="todayCount">—</strong></div>
+     <div class="stat"><small>ডুপ্লিকেট ফোন নম্বর</small><strong id="duplicateCount">—</strong></div>
+     <div class="stat"><small>সাধারণ Admin</small><strong id="adminCount">—</strong></div>
+    </div>
+    <div class="panel"><h2>রক্তের গ্রুপ অনুযায়ী</h2><div class="grid" id="groupStats"></div></div>
+    <div class="panel"><h2>সাম্প্রতিক নিবন্ধন</h2><div class="tablewrap"><table><thead><tr><th>নাম</th><th>রক্তের গ্রুপ</th><th>ফোন</th><th>এলাকা</th><th>তারিখ</th></tr></thead><tbody id="recentRows"></tbody></table></div></div>
+   </section>
+   <section id="page-donors" class="hidden">
+    <div class="pagehead"><h1>রক্তদাতা ব্যবস্থাপনা</h1><button class="btn secondary no-print" id="donorPrint">PDF / প্রিন্ট</button></div>
+    <div class="panel">
+     <div class="toolbar no-print"><input class="field search" id="searchInput" placeholder="নাম, ফোন, গ্রাম বা এলাকা লিখুন"><select class="field" id="groupFilter"><option value="">সব রক্তের গ্রুপ</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select><select class="field" id="upazilaFilter"><option value="">সব উপজেলা</option></select><select class="field" id="unionFilter"><option value="">সব ইউনিয়ন</option></select><select class="field" id="wardFilter"><option value="">সব ওয়ার্ড</option></select><select class="field" id="villageFilter"><option value="">সব গ্রাম</option></select><button class="btn secondary" id="clearFilters">মুছুন</button></div>
+     <div class="print-title"><h2>রক্ত বন্ধন রৌমারী</h2><b>রক্তদাতার তালিকা</b></div>
+     <div class="tablewrap"><table><thead><tr><th>নাম</th><th>রক্ত</th><th>মোবাইল</th><th>উপজেলা / ইউনিয়ন</th><th>গ্রাম</th><th>নিবন্ধন</th><th class="no-print">কাজ</th></tr></thead><tbody id="donorRows"></tbody></table></div>
+     <p class="muted" id="donorSummary"></p>
+    </div>
+   </section>
+   <section id="page-duplicates" class="hidden"><div class="pagehead"><h1>ডুপ্লিকেট ফোন নম্বর</h1></div><div class="notice">একই নম্বর একাধিক নিবন্ধনে পাওয়া গেলে এখানে দেখাবে। একই নম্বর মানেই নিবন্ধন জাল নয়, যাচাই করে ব্যবস্থা নিন।</div><div class="panel" id="duplicateList"></div></section>
+   <section id="page-reports" class="hidden"><div class="pagehead"><h1>রিপোর্ট ও PDF</h1></div><div class="panel">
+    <div class="toolbar no-print"><select class="field" id="reportGroup"><option value="">সব রক্তের গ্রুপ</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select><select class="field" id="reportUpazila"><option value="">সব উপজেলা</option></select><select class="field" id="reportUnion"><option value="">সব ইউনিয়ন</option></select><input type="date" class="field" id="fromDate"><input type="date" class="field" id="toDate"><button class="btn" id="makeReport">রিপোর্ট তৈরি</button><button class="btn secondary" id="reportPdf">PDF ডাউনলোড</button><button class="btn secondary" id="reportCsv">CSV ডাউনলোড</button></div>
+    <div class="print-title"><h2>রক্ত বন্ধন রৌমারী</h2><b>রক্তদাতা রিপোর্ট</b></div><p id="reportSummary" class="muted">ফিল্টার নির্বাচন করে রিপোর্ট তৈরি করুন।</p><div class="tablewrap"><table><thead><tr><th>নাম</th><th>রক্ত</th><th>ফোন</th><th>উপজেলা</th><th>ইউনিয়ন</th><th>গ্রাম</th><th>নিবন্ধন</th></tr></thead><tbody id="reportRows"></tbody></table></div>
+   </div></section>
+   <section id="page-backup" class="hidden"><div class="pagehead"><h1>Backup ও Restore</h1></div><div class="notice">Backup ফাইলে ব্যক্তিগত ফোন নম্বরসহ সংবেদনশীল তথ্য থাকে। নিরাপদ স্থানে রাখুন এবং কারও সঙ্গে প্রকাশ্যে শেয়ার করবেন না।</div><div class="two">
+    <div class="panel"><h2>Backup তৈরি</h2><p class="muted">বর্তমান সব রক্তদাতার তথ্য JSON ফাইলে সংরক্ষণ করুন।</p><button class="btn" id="backupBtn">JSON Backup ডাউনলোড</button></div>
+    <div class="panel"><h2>Backup Restore</h2><p class="muted">শুধু Owner পুরোনো JSON backup থেকে তথ্য পুনরুদ্ধার করতে পারবেন। একই ID থাকলে তথ্য প্রতিস্থাপিত হবে।</p><input type="file" id="restoreFile" accept=".json,application/json" class="field" style="width:100%"><button class="btn danger" id="restoreBtn" style="margin-top:10px">Restore শুরু করুন</button><p id="restoreMsg" class="muted"></p></div>
+   </div></section>
+   <section id="page-admins" class="hidden"><div class="pagehead"><h1>Admin ব্যবস্থাপনা</h1></div><div class="notice">সর্বোচ্চ ২ জন সাধারণ Admin। প্রথমে প্রত্যেক Admin-কে Google দিয়ে এই প্যানেলে একবার প্রবেশ করে Firebase UID নিতে হবে। তারপর Owner এখানে UID ও Gmail যোগ করবেন।</div><div class="panel"><h2>অনুমোদিত Admin</h2><div id="adminSlots"></div></div><div class="panel"><h2>নতুন Admin যোগ</h2><div class="formgrid"><div class="formitem"><label>Admin-এর Gmail</label><input id="newAdminEmail" type="email" placeholder="name@gmail.com"></div><div class="formitem"><label>Firebase UID</label><input id="newAdminUid" placeholder="Admin-এর UID"></div></div><button class="btn" id="addAdminBtn" style="margin-top:12px">Admin যোগ করুন</button></div></section>
+   <section id="page-activity" class="hidden"><div class="pagehead"><h1>কার্যক্রমের ইতিহাস</h1></div><div class="panel"><p class="muted">Admin Panel চালু হওয়ার পর থেকে এখানে রেকর্ড হওয়া পরিবর্তনগুলো দেখা যাবে। পুরোনো পরিবর্তনের ইতিহাস স্বয়ংক্রিয়ভাবে তৈরি হবে না।</p><div class="tablewrap"><table><thead><tr><th>সময়</th><th>ব্যবহারকারী</th><th>কাজ</th><th>রেকর্ড ID</th></tr></thead><tbody id="activityRows"></tbody></table></div></div></section>
+   <section id="page-security" class="hidden"><div class="pagehead"><h1>নিরাপত্তা ও অনুমতি</h1></div><div class="panel"><h2>বর্তমান প্রবেশাধিকার</h2><p id="securityText"></p><ul><li>সাধারণ Admin: রক্তদাতার তথ্য দেখা ও সংশোধন।</li><li>সাধারণ Admin: রক্তদাতা মুছে ফেলতে পারবে না।</li><li>Owner: Admin নিয়ন্ত্রণ, Backup Restore ও রক্তদাতা মুছে ফেলার ক্ষমতা।</li><li>Google account-এ 2-Step Verification চালু রাখুন।</li></ul><div class="notice">নিরাপত্তা কার্যকর করতে এই প্যানেলের সঙ্গে দেওয়া Firestore Rules অবশ্যই Firebase Console-এ প্রকাশ করতে হবে। শুধু HTML ফাইল দিয়ে নিরাপত্তা নিশ্চিত হয় না।</div></div></section>
+  </main>
+ </div>
+</div>
+<div id="editModal" class="modalback hidden"><div class="modal"><h2>রক্তদাতার তথ্য সংশোধন</h2><form id="editForm"><div class="formgrid" id="editFields"></div><div class="modalactions"><button type="button" class="btn secondary" id="cancelEdit">বাতিল</button><button class="btn" type="submit">পরিবর্তন সংরক্ষণ</button></div></form></div></div>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getAuth,GoogleAuthProvider,signInWithPopup,signInWithRedirect,getRedirectResult,onAuthStateChanged,signOut} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {getFirestore,collection,doc,getDoc,getDocs,setDoc,updateDoc,deleteDoc,addDoc,query,orderBy,limit,serverTimestamp,writeBatch} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig={apiKey:"AIzaSyAICYgFvCdrd009JrQwgTthQ4R5oxhGoY8",authDomain:"rokto-bondhon-roumari.firebaseapp.com",projectId:"rokto-bondhon-roumari",storageBucket:"rokto-bondhon-roumari.firebasestorage.app",messagingSenderId:"635710402171",appId:"1:635710402171:web:e5c25d42d0eed8af50bcde",measurementId:"G-70BP42NXBF"};
+const OWNER_EMAIL="mdsujonmia4592666@gmail.com";
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app),provider=new GoogleAuthProvider();
+provider.setCustomParameters({prompt:"select_account"});
+let currentUser=null,role=null,donors=[],filtered=[],reportData=[],editingId=null;
+const $=id=>document.getElementById(id), esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const bnDigits=s=>String(s??"").replace(/[০-৯]/g,d=>"০১২৩৪৫৬৭৮৯".indexOf(d));
+function normalizePhone(v){let n=bnDigits(v).replace(/\D/g,"");if(n.startsWith("00880"))n=n.slice(2);if(n.startsWith("880"))n="0"+n.slice(3);return n;}
+function dateText(v){if(!v)return "—";let d=v.toDate?v.toDate():new Date(v);return isNaN(d)? "—":d.toLocaleDateString("bn-BD");}
+function timeText(v){if(!v)return "—";let d=v.toDate?v.toDate():new Date(v);return isNaN(d)?"—":d.toLocaleString("bn-BD");}
+function area(d){return [d.upazila,d.union].filter(Boolean).join(" / ");}
+function isOwnerEmail(u){return u?.email===OWNER_EMAIL&&u.emailVerified===true;}
+async function checkRole(u){
+ if(isOwnerEmail(u))return "owner";
+ const results=await Promise.allSettled(["slot1","slot2"].map(id=>getDoc(doc(db,"adminSlots",id))));
+ return results.some(r=>r.status==="fulfilled"&&r.value.exists()&&r.value.data().uid===u.uid&&r.value.data().email===u.email)?"admin":null;
+}
+function showMsg(id,msg){$(id).textContent=msg;}
+async function logAction(action,recordId=""){try{await addDoc(collection(db,"adminActivity"),{uid:currentUser.uid,email:currentUser.email,role,action,recordId,createdAt:serverTimestamp()});}catch(e){console.warn("Activity log failed",e);}}
+async function enter(u){
+ currentUser=u;role=await checkRole(u);
+ if(!role){await signOut(auth);$("login").classList.remove("hidden");$("app").classList.add("hidden");showMsg("loginMsg","এই Google অ্যাকাউন্টটি অনুমোদিত নয়। Owner-এর কাছ থেকে অনুমতি নিন।");return;}
+ $("login").classList.add("hidden");$("app").classList.remove("hidden");$("userEmail").textContent=u.email;$("rolePill").textContent=role==="owner"?"OWNER":"ADMIN";
+ document.querySelectorAll(".owner-only").forEach(x=>x.classList.toggle("hidden",role!=="owner"));
+ $("securityText").textContent=role==="owner"?"আপনি Owner হিসেবে প্রবেশ করেছেন। আপনার সব অনুমতি চালু আছে।":"আপনি সাধারণ Admin হিসেবে প্রবেশ করেছেন। তথ্য সংশোধন করতে পারবেন, কিন্তু রেকর্ড মুছতে বা Admin নিয়ন্ত্রণ করতে পারবেন না।";
+ await loadAll();
+}
+async function loadAll(){
+ $("totalCount").textContent="…";
+ try{
+  const snap=await getDocs(collection(db,"donors"));
+  donors=snap.docs.map(x=>({id:x.id,...x.data()})).filter(d=>d.consent===true);
+  donors.sort((a,b)=>toMillis(b.createdAt)-toMillis(a.createdAt));
+  renderDashboard();renderDonors();renderDuplicates();fillAreaFilters();
+  if(role==="owner")await renderAdminSlots();
+  await renderActivity();
+ }catch(e){alert("তথ্য লোড করা যায়নি: "+e.message);}
+}
+function toMillis(v){if(!v)return 0;return v.toMillis?v.toMillis():new Date(v).getTime()||0;}
+function getDuplicates(){const m=new Map();for(const d of donors){const p=normalizePhone(d.phone);if(p){if(!m.has(p))m.set(p,[]);m.get(p).push(d);}}return [...m.entries()].filter(([,a])=>a.length>1);}
+function renderDashboard(){
+ $("totalCount").textContent=donors.length.toLocaleString("bn-BD");
+ const now=new Date();const today=donors.filter(d=>{const t=toMillis(d.createdAt);const x=new Date(t);return t&&x.getFullYear()===now.getFullYear()&&x.getMonth()===now.getMonth()&&x.getDate()===now.getDate();});
+ $("todayCount").textContent=today.length.toLocaleString("bn-BD");$("duplicateCount").textContent=getDuplicates().length.toLocaleString("bn-BD");
+ $("adminCount").textContent=role==="owner"?"লোড হচ্ছে":"সীমিত";
+ const groups=["A+","A-","B+","B-","AB+","AB-","O+","O-"];
+ $("groupStats").innerHTML=groups.map(g=>`<div class="stat"><small>${g}</small><strong>${donors.filter(d=>d.bloodGroup===g).length.toLocaleString("bn-BD")}</strong></div>`).join("");
+ $("recentRows").innerHTML=donors.slice(0,8).map(d=>`<tr><td>${esc(d.name)}</td><td><span class="pill">${esc(d.bloodGroup)}</span></td><td>${esc(d.phone)}</td><td>${esc(area(d)||d.village)}</td><td>${dateText(d.createdAt)}</td></tr>`).join("")||'<tr><td colspan="5" class="empty">কোনো তথ্য নেই</td></tr>';
+}
+const AREA_MAP={
+ "কুড়িগ্রাম সদর":["কাঁঠালবাড়ী","হলোখানা","ভোগডাঙ্গা","ঘোগাদহ","বেলগাছা","মোগলবাসা","পাঁচগাছি","যাত্রাপুর"],
+ "ভূরুঙ্গামারী":["পাথরডুবি","শিলখুড়ি","তিলাই","পাইকেরছড়া","ভুরুঙ্গামারী","জয়মনিরহাট","আন্ধারীঝাড়","বলদিয়া","চর-ভূরুঙ্গামারী","বঙ্গসোনাহাট"],
+ "নাগেশ্বরী":["রামখানা","রায়গঞ্জ","বামনডাঙ্গা","বেরুবাড়ী","সন্তোষপুর","নেওয়াশী","হাসনাবাদ","ভিতরবন্দ","কালীগঞ্জ","নুনখাওয়া","নারায়ণপুর","বল্লভেরখাস","কেদার","কচাকাটা"],
+ "ফুলবাড়ী":["শিমুলবাড়ী","নাওডাঙ্গা","ভাঙ্গামোড়","ফুলবাড়ী","কাশিপুর","বড়ভিটা"],
+ "রাজারহাট":["ঘড়িয়ালডাঙ্গা","ছিনাই","রাজারহাট","চাকিরপশার","বিদ্যানন্দ","উমরমজিদ","নজিমখাঁন"],
+ "উলিপুর":["গুনাইগাছ","দলদলিয়া","দুর্গাপুর","তবকপুর","বুড়াবুড়ী","পান্ডুল","ধামশ্রেণী","ধরণীবাড়ী","থেতরাই","হাতিয়া","বজরা","বেগমগঞ্জ","সাহেবের আলগা"],
+ "চিলমারী":["থানাহাট","রাণীগঞ্জ","রমনা","চিলমারী","অষ্টমীর চর","নয়ারহাট"],
+ "রৌমারী":["বন্দবেড়","শৌলমারী","রৌমারী","দাঁতভাঙ্গা","যাদুরচর","চর শৌলমারী"],
+ "চর রাজিবপুর":["রাজিবপুর","কোদালকাটি","মোহনগঞ্জ"]
+};
+const UPS=Object.keys(AREA_MAP), WARDS=["১","২","৩","৪","৫","৬","৭","৮","৯","জানা নেই"];
+function setOptions(id,values,firstLabel){const el=$(id),old=el.value;el.innerHTML=`<option value="">${firstLabel}</option>`+values.map(v=>`<option value="${esc(v)}">${esc(v)}</option>`).join("");if(values.includes(old))el.value=old;}
+function fillAreaFilters(){
+ for(const id of ["upazilaFilter","reportUpazila"])setOptions(id,UPS,"সব উপজেলা");
+ updateUnionOptions("upazilaFilter","unionFilter");updateUnionOptions("reportUpazila","reportUnion");
+ setOptions("wardFilter",WARDS,"সব ওয়ার্ড");
+ updateVillageOptions();
+}
+function updateUnionOptions(upId,unionId){const up=$(upId).value;const vals=up? (AREA_MAP[up]||[]):[...new Set(Object.values(AREA_MAP).flat())];setOptions(unionId,vals,"সব ইউনিয়ন");}
+function updateVillageOptions(){const up=$("upazilaFilter").value,un=$("unionFilter").value;const vals=[...new Set(donors.filter(d=>(!up||d.upazila===up)&&(!un||d.union===un)).map(d=>d.village).filter(Boolean))].sort();setOptions("villageFilter",vals,"সব গ্রাম");}
+function renderDonors(){
+ const q=$("searchInput").value.trim().toLowerCase(),g=$("groupFilter").value,u=$("upazilaFilter").value,un=$("unionFilter").value,w=$("wardFilter").value,v=$("villageFilter").value;
+ filtered=donors.filter(d=>(!g||d.bloodGroup===g)&&(!u||d.upazila===u)&&(!un||d.union===un)&&(!w||d.ward===w)&&(!v||d.village===v)&&(!q||[d.name,d.phone,d.village,d.union,d.upazila,d.ward].some(x=>String(x??"").toLowerCase().includes(q))));
+ $("donorRows").innerHTML=filtered.map(d=>`<tr><td>${esc(d.name)}</td><td><span class="pill">${esc(d.bloodGroup)}</span></td><td>${esc(d.phone)}</td><td>${esc(area(d))}</td><td>${esc(d.village)}</td><td>${dateText(d.createdAt)}</td><td class="no-print"><button class="btn secondary small" data-edit="${esc(d.id)}">সংশোধন</button> ${role==="owner"?`<button class="btn danger small" data-delete="${esc(d.id)}">ডিলিট</button>`:""}</td></tr>`).join("")||'<tr><td colspan="7" class="empty">কোনো রক্তদাতা পাওয়া যায়নি</td></tr>';
+ $("donorSummary").textContent=`মোট ${filtered.length.toLocaleString("bn-BD")} জন দেখানো হচ্ছে।`;
+ document.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>openEdit(b.dataset.edit));
+ document.querySelectorAll("[data-delete]").forEach(b=>b.onclick=()=>removeDonor(b.dataset.delete));
+}
+function renderDuplicates(){
+ const dup=getDuplicates();$("duplicateList").innerHTML=dup.length?dup.map(([phone,list])=>`<div style="padding:12px 0;border-bottom:1px solid var(--line)"><b>${esc(phone)}</b> <span class="pill">${list.length}টি নিবন্ধন</span><div class="muted">${list.map(d=>`${esc(d.name)} (${esc(d.bloodGroup)}, ${esc(area(d))})`).join(" · ")}</div></div>`).join(""):'<div class="empty">ডুপ্লিকেট নম্বর পাওয়া যায়নি।</div>';
+}
+const fields=[["name","নাম"],["phone","মোবাইল নম্বর"],["bloodGroup","রক্তের গ্রুপ"],["district","জেলা"],["upazila","উপজেলা"],["union","ইউনিয়ন"],["ward","ওয়ার্ড"],["village","গ্রাম"],["facebook","Facebook লিংক"],["lastDonation","সর্বশেষ রক্তদানের তারিখ"]];
+function openEdit(id){
+ const d=donors.find(x=>x.id===id);if(!d)return;editingId=id;
+ $("editFields").innerHTML=fields.map(([k,label])=>`<div class="formitem"><label>${label}</label>${k==="bloodGroup"?`<select name="${k}">${["A+","A-","B+","B-","AB+","AB-","O+","O-"].map(g=>`<option ${d[k]===g?"selected":""}>${g}</option>`).join("")}</select>`:`<input name="${k}" value="${esc(d[k]??"")}" ${["district","upazila","union","ward"].includes(k)?"required":""}>`}</div>`).join("");
+ $("editModal").classList.remove("hidden");
+}
+$("cancelEdit").onclick=()=>$("editModal").classList.add("hidden");
+$("editForm").onsubmit=async e=>{
+ e.preventDefault();const d=donors.find(x=>x.id===editingId);if(!d)return;
+ const data=Object.fromEntries(new FormData(e.target).entries());
+ if(!data.name.trim()||!data.phone.trim()){alert("নাম ও ফোন নম্বর দিতে হবে।");return;}
+ if(!confirm("এই রক্তদাতার তথ্য সংশোধন করবেন?"))return;
+ try{await updateDoc(doc(db,"donors",editingId),data);await logAction("রক্তদাতার তথ্য সংশোধন",editingId);$("editModal").classList.add("hidden");await loadAll();alert("তথ্য সংশোধন হয়েছে।");}catch(err){alert("সংশোধন করা যায়নি: "+err.message);}
+};
+async function removeDonor(id){
+ if(role!=="owner")return;const d=donors.find(x=>x.id===id);if(!d)return;
+ if(!confirm(`আপনি কি ${d.name} (${d.phone})-এর রেকর্ড স্থায়ীভাবে মুছে ফেলতে চান?`))return;
+ if(!confirm("শেষবার নিশ্চিত করুন। এই কাজ ফিরিয়ে আনা যাবে না, আগে Backup নেওয়া ভালো。"))return;
+ try{await deleteDoc(doc(db,"donors",id));await logAction("রক্তদাতার রেকর্ড ডিলিট",id);await loadAll();alert("রেকর্ড মুছে ফেলা হয়েছে।");}catch(e){alert("ডিলিট করা যায়নি: "+e.message);}
+}
+function getReport(){
+ const g=$("reportGroup").value,u=$("reportUpazila").value,un=$("reportUnion").value,from=$("fromDate").value,to=$("toDate").value;
+ return donors.filter(d=>{if(g&&d.bloodGroup!==g)return false;if(u&&d.upazila!==u)return false;if(un&&d.union!==un)return false;const t=toMillis(d.createdAt);if(from&&(!t||new Date(t)<new Date(from+"T00:00:00")))return false;if(to&&(!t||new Date(t)>new Date(to+"T23:59:59")))return false;return true;});
+}
+function renderReport(){reportData=getReport();$("reportRows").innerHTML=reportData.map(d=>`<tr><td>${esc(d.name)}</td><td>${esc(d.bloodGroup)}</td><td>${esc(d.phone)}</td><td>${esc(d.upazila)}</td><td>${esc(d.union)}</td><td>${esc(d.village)}</td><td>${dateText(d.createdAt)}</td></tr>`).join("")||'<tr><td colspan="7" class="empty">কোনো তথ্য নেই</td></tr>';$("reportSummary").textContent=`রিপোর্টে মোট ${reportData.length} জন রক্তদাতা।`;}
+function csvDownload(rows,filename){const cols=["name","phone","bloodGroup","district","upazila","union","ward","village","facebook","lastDonation","createdAt"];const labels=["নাম","মোবাইল","রক্তের গ্রুপ","জেলা","উপজেলা","ইউনিয়ন","ওয়ার্ড","গ্রাম","Facebook","সর্বশেষ রক্তদান","নিবন্ধনের তারিখ"];const cell=v=>'"'+String(v??"").replace(/"/g,'""')+'"';const lines=[labels.map(cell).join(","),...rows.map(d=>cols.map(k=>cell(k==="createdAt"?dateText(d[k]):d[k])).join(","))];downloadBlob("\uFEFF"+lines.join("\r\n"),filename,"text/csv;charset=utf-8");}
+function downloadBlob(content,name,type){const blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=name;a.click();URL.revokeObjectURL(url);}
+function printRows(rows,title){
+ if(!rows.length){alert("ডাউনলোড করার মতো কোনো তথ্য নেই।");return;}
+ const w=window.open("","_blank");if(!w){alert("PDF তৈরি করতে Browser popup অনুমতি দিন।");return;}
+ const body=rows.map(d=>`<tr><td>${esc(d.name)}</td><td>${esc(d.bloodGroup)}</td><td>${esc(d.phone)}</td><td>${esc(d.upazila)}</td><td>${esc(d.union)}</td><td>${esc(d.ward)}</td><td>${esc(d.village)}</td><td>${dateText(d.createdAt)}</td></tr>`).join("");
+ w.document.write(`<!doctype html><html lang="bn"><meta charset="utf-8"><title>${esc(title)}</title><style>body{font-family:Arial,sans-serif;padding:18px}h2,h3{text-align:center}table{width:100%;border-collapse:collapse;font-size:11px}th,td{border:1px solid #aaa;padding:6px;text-align:left}@media print{button{display:none}}</style><h2>রক্ত বন্ধন রৌমারী</h2><h3>${esc(title)}</h3><p>মোট ${rows.length} জন</p><table><thead><tr><th>নাম</th><th>রক্ত</th><th>ফোন</th><th>উপজেলা</th><th>ইউনিয়ন</th><th>ওয়ার্ড</th><th>গ্রাম</th><th>নিবন্ধন</th></tr></thead><tbody>${body}</tbody></table><script>window.onload=()=>window.print()<\/script></html>`);w.document.close();
+}
+async function renderAdminSlots(){
+ const slots=await Promise.all(["slot1","slot2"].map(async id=>{const s=await getDoc(doc(db,"adminSlots",id));return {id,data:s.exists()?s.data():null};}));
+ $("adminCount").textContent=slots.filter(s=>s.data?.uid).length+"/2";
+ $("adminSlots").innerHTML=slots.map(s=>`<div style="padding:12px 0;border-bottom:1px solid var(--line)"><b>${s.id==="slot1"?"Admin ১":"Admin ২"}</b><div class="muted">${s.data?esc(s.data.email)+" · "+esc(s.data.uid):"খালি"}</div>${s.data?`<button class="btn danger small" data-remove-slot="${s.id}">Admin সরান</button>`:""}</div>`).join("");
+ document.querySelectorAll("[data-remove-slot]").forEach(b=>b.onclick=async()=>{if(!confirm("এই Admin-এর অনুমতি বাতিল করবেন?"))return;try{await deleteDoc(doc(db,"adminSlots",b.dataset.removeSlot));await logAction("Admin সরানো",b.dataset.removeSlot);await renderAdminSlots();}catch(e){alert(e.message);}});
+}
+$("addAdminBtn").onclick=async()=>{
+ const email=$("newAdminEmail").value.trim().toLowerCase(),uid=$("newAdminUid").value.trim();if(!email||!uid){alert("Gmail ও UID দুটোই দিতে হবে।");return;}if(email===OWNER_EMAIL){alert("Owner-কে সাধারণ Admin হিসেবে যোগ করা যাবে না।");return;}
+ try{
+  const [a,b]=await Promise.all(["slot1","slot2"].map(id=>getDoc(doc(db,"adminSlots",id))));
+  const exists=[a,b].some(s=>s.exists()&&s.data().uid===uid);if(exists){alert("এই Admin আগে থেকেই যুক্ত আছেন।");return;}
+  const target=!a.exists()?"slot1":!b.exists()?"slot2":null;if(!target){alert("সর্বোচ্চ ২ জন Admin যোগ করা যাবে।");return;}
+  await setDoc(doc(db,"adminSlots",target),{uid,email,role:"admin",createdAt:serverTimestamp(),createdBy:currentUser.uid});
+  await logAction("নতুন Admin যোগ",uid);$("newAdminEmail").value="";$("newAdminUid").value="";await renderAdminSlots();alert("Admin যোগ হয়েছে। UID ও Gmail সঠিক কিনা নিশ্চিত করুন।");
+ }catch(e){alert("Admin যোগ করা যায়নি: "+e.message);}
+};
+async function renderActivity(){
+ try{const s=await getDocs(query(collection(db,"adminActivity"),orderBy("createdAt","desc"),limit(100)));$("activityRows").innerHTML=s.docs.map(x=>{const d=x.data();return `<tr><td>${timeText(d.createdAt)}</td><td>${esc(d.email)}</td><td>${esc(d.action)}</td><td>${esc(d.recordId)}</td></tr>`;}).join("")||'<tr><td colspan="4" class="empty">এখনো কোনো কার্যক্রম নেই</td></tr>';}catch(e){$("activityRows").innerHTML='<tr><td colspan="4">ইতিহাস লোড করা যায়নি।</td></tr>';}
+}
+function showPage(name){document.querySelectorAll("main section").forEach(s=>s.classList.add("hidden"));$("page-"+name).classList.remove("hidden");document.querySelectorAll(".navbtn").forEach(b=>b.classList.toggle("active",b.dataset.page===name));$("layout").classList.remove("aside-open");if(name==="reports")renderReport();}
+document.querySelectorAll(".navbtn").forEach(b=>b.onclick=()=>showPage(b.dataset.page));
+$("menuBtn").onclick=()=>$("layout").classList.toggle("aside-open");
+$("loginBtn").onclick=async()=>{showMsg("loginMsg","Google Login চালু হচ্ছে…");try{await signInWithPopup(auth,provider);}catch(e){if(e.code==="auth/popup-blocked"||e.code==="auth/popup-closed-by-user"){await signInWithRedirect(auth,provider);}else showMsg("loginMsg","প্রবেশ করা যায়নি: "+e.message);}};
+$("logoutBtn").onclick=()=>signOut(auth);
+$("refreshBtn").onclick=loadAll;
+["searchInput","groupFilter","upazilaFilter","unionFilter","wardFilter","villageFilter"].forEach(id=>$(id).addEventListener(id==="searchInput"?"input":"change",()=>{if(id==="upazilaFilter")updateUnionOptions("upazilaFilter","unionFilter");if(id==="upazilaFilter"||id==="unionFilter")updateVillageOptions();renderDonors();}));
+$("reportUpazila").addEventListener("change",()=>updateUnionOptions("reportUpazila","reportUnion"));
+$("clearFilters").onclick=()=>{$("searchInput").value="";["groupFilter","upazilaFilter","unionFilter","wardFilter","villageFilter"].forEach(id=>$(id).value="");updateUnionOptions("upazilaFilter","unionFilter");updateVillageOptions();renderDonors();};
+$("makeReport").onclick=renderReport;
+$("reportPdf").onclick=()=>{renderReport();printRows(reportData,"রক্তদাতা রিপোর্ট");};
+$("donorPrint").onclick=()=>printRows(filtered,"রক্তদাতার তালিকা");
+$("reportCsv").onclick=()=>{renderReport();csvDownload(reportData,"rokto-bondhon-report.csv");};
+$("backupBtn").onclick=()=>{if(role!=="owner"&&!confirm("আপনি Admin হিসেবে সম্পূর্ণ ডেটার backup নিচ্ছেন। এগিয়ে যাবেন?"))return;const data={project:"rokto-bondhon-roumari",exportedAt:new Date().toISOString(),donors:donors.map(({id,...d})=>({id,...d,createdAt:d.createdAt?.toDate?d.createdAt.toDate().toISOString():d.createdAt??null}))};downloadBlob(JSON.stringify(data,null,2),"rokto-bondhon-backup-"+new Date().toISOString().slice(0,10)+".json","application/json");};
+$("restoreBtn").onclick=async()=>{
+ if(role!=="owner"){alert("শুধু Owner Restore করতে পারবেন।");return;}const f=$("restoreFile").files[0];if(!f){alert("আগে JSON Backup ফাইল নির্বাচন করুন।");return;}
+ try{const parsed=JSON.parse(await f.text());if(parsed.project!=="rokto-bondhon-roumari"||!Array.isArray(parsed.donors))throw new Error("এটি রক্ত বন্ধনের সঠিক Backup ফাইল নয়।");if(!confirm(`${parsed.donors.length}টি রেকর্ড Restore হবে। একই ID থাকলে পুরোনো তথ্য প্রতিস্থাপিত হবে। এগোবেন?`))return;
+  for(let i=0;i<parsed.donors.length;i+=400){const batch=writeBatch(db);for(const d of parsed.donors.slice(i,i+400)){if(!d.id||typeof d.id!=="string")continue;const {id,...data}=d;if(typeof data.createdAt==="string")data.createdAt=new Date(data.createdAt);batch.set(doc(db,"donors",id),data,{merge:false});}await batch.commit();}
+  await logAction("Backup Restore",String(parsed.donors.length));showMsg("restoreMsg","Restore সম্পন্ন হয়েছে।");await loadAll();
+ }catch(e){showMsg("restoreMsg","Restore ব্যর্থ: "+e.message);}
+};
+getRedirectResult(auth).catch(e=>showMsg("loginMsg",e.message));
+onAuthStateChanged(auth,async u=>{if(u){try{await enter(u);}catch(e){console.error(e);showMsg("loginMsg","অনুমতি যাচাই করা যায়নি। Firestore Rules প্রকাশ করা আছে কি না দেখুন। "+e.message);}}else{$("login").classList.remove("hidden");$("app").classList.add("hidden");}});
+</script>
+</body>
+      </html>
