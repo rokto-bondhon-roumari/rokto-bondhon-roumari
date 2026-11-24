@@ -399,7 +399,8 @@ from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
  getAuth,
  GoogleAuthProvider,
- signInWithPopup,
+ signInWithRedirect,
+ getRedirectResult,
  onAuthStateChanged,
  signOut
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -420,6 +421,7 @@ import {
  writeBatch,
  addDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 const firebaseConfig={
  apiKey:"AIzaSyAICYfGvCdrd009JrQwgTthQ4R5oxhGoY8",
  authDomain:"rokto-bondhon-roumari.firebaseapp.com",
@@ -430,7 +432,6 @@ const firebaseConfig={
  measurementId:"G-70BP42NXBF"
 };
 
-
 const OWNER_UID="mBBXzWPodNc2tiQBvwmHit04NLC2";
 const OWNER_EMAIL="mdsujonmia4592666@gmail.com";
 
@@ -438,6 +439,10 @@ const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
 const db=getFirestore(app);
 const provider=new GoogleAuthProvider();
+
+provider.setCustomParameters({
+ prompt:"select_account"
+});
 
 let currentUser=null;
 let currentRole=null;
@@ -1013,14 +1018,23 @@ async function restoreData(){
  }
 }
 
+/* Google Login: Redirect method */
 $("loginBtn").onclick=async()=>{
  try{
-  $("loginError").textContent="";
-  await signInWithPopup(auth,provider);
+  $("loginBtn").disabled=true;
+  $("loginError").textContent="Google Login চালু হচ্ছে...";
+  await signInWithRedirect(auth,provider);
  }catch(e){
-  $("loginError").textContent=e.message;
+  $("loginBtn").disabled=false;
+  $("loginError").textContent="Login Error: "+e.message;
  }
 };
+
+/* Redirect থেকে ফিরে এলে Login Error দেখাবে */
+getRedirectResult(auth).catch(e=>{
+ $("loginBtn").disabled=false;
+ $("loginError").textContent="Google Login Error: "+e.message;
+});
 
 $("logoutBtn").onclick=()=>signOut(auth);
 
@@ -1138,4 +1152,4 @@ onAuthStateChanged(auth,async u=>{
 
 </script>
 </body>
-  </html>
+</html>
