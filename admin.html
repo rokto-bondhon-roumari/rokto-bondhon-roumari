@@ -214,7 +214,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig={
- apiKey:"AIzaSyAICYfGvCdrd009JrQwgTthQ4R5oxhGoY8",
+ apiKey:"AIzaSyAICYfGvCdrd009JrCQwgTthQ4R5oxhGoY8",
  authDomain:"rokto-bondhon-roumari.firebaseapp.com",
  projectId:"rokto-bondhon-roumari",
  storageBucket:"rokto-bondhon-roumari.firebasestorage.app",
@@ -257,7 +257,7 @@ function dateText(v){
  return isNaN(d)? "":d.toLocaleDateString("bn-BD");
 }
 function normalizePhone(p){
- let n=String(p||"").replace(/\D/g,"").replace(/[০-৯]/g,d=>"০১২৩৪৫৬৭৮৯".indexOf(d));
+ let n=String(p||"").replace(/[০-৯]/g,d=>"০১২৩৪৫৬৭৮৯".indexOf(d)).replace(/\D/g,"");
  if(n.startsWith("00880"))n=n.slice(2);
  if(n.startsWith("880"))n="0"+n.slice(3);
  return n;
@@ -599,4 +599,4 @@ onAuthStateChanged(auth,async u=>{
 });
 </script>
 </body>
-       </html>
+                 </html>
